@@ -38,20 +38,20 @@ module Trb1
           if definition[:nested]
             parse_pipeline = ->(input, options) do
               functions = options[:binding].send(:parse_functions)
-              pipeline  = Representable::Pipeline[*functions] # Pipeline[StopOnExcluded, AssignName, ReadFragment, StopOnNotFound, OverwriteOnNil, Collect[#<Representable::Function::CreateObject:0xa6148ec>, #<Representable::Function::Decorate:0xa6148b0>, Deserialize], Set]
+              pipeline  = Trb1::Representable::Pipeline[*functions] # Pipeline[StopOnExcluded, AssignName, ReadFragment, StopOnNotFound, OverwriteOnNil, Collect[#<Trb1::Representable::Function::CreateObject:0xa6148ec>, #<Trb1::Representable::Function::Decorate:0xa6148b0>, Deserialize], Set]
 
-              pipeline  = Representable::Pipeline::Insert.(pipeline, external_populator,            replace: Representable::CreateObject::Instance)
-              pipeline  = Representable::Pipeline::Insert.(pipeline, Representable::Decorate,       delete: true)
-              pipeline  = Representable::Pipeline::Insert.(pipeline, Deserialize,                   replace: Representable::Deserialize)
-              pipeline  = Representable::Pipeline::Insert.(pipeline, Representable::SetValue,       delete: true) # FIXME: only diff to options without :populator
+              pipeline  = Trb1::Representable::Pipeline::Insert.(pipeline, external_populator,            replace: Trb1::Representable::CreateObject::Instance)
+              pipeline  = Trb1::Representable::Pipeline::Insert.(pipeline, Trb1::Representable::Decorate,       delete: true)
+              pipeline  = Trb1::Representable::Pipeline::Insert.(pipeline, Deserialize,                   replace: Trb1::Representable::Deserialize)
+              pipeline  = Trb1::Representable::Pipeline::Insert.(pipeline, Trb1::Representable::SetValue,       delete: true) # FIXME: only diff to options without :populator
             end
           else
             parse_pipeline = ->(input, options) do
               functions = options[:binding].send(:parse_functions)
-              pipeline  = Representable::Pipeline[*functions] # Pipeline[StopOnExcluded, AssignName, ReadFragment, StopOnNotFound, OverwriteOnNil, Collect[#<Representable::Function::CreateObject:0xa6148ec>, #<Representable::Function::Decorate:0xa6148b0>, Deserialize], Set]
+              pipeline  = Trb1::Representable::Pipeline[*functions] # Pipeline[StopOnExcluded, AssignName, ReadFragment, StopOnNotFound, OverwriteOnNil, Collect[#<Trb1::Representable::Function::CreateObject:0xa6148ec>, #<Trb1::Representable::Function::Decorate:0xa6148b0>, Deserialize], Set]
 
               # FIXME: this won't work with property :name, inherit: true (where there is a populator set already).
-              pipeline  = Representable::Pipeline::Insert.(pipeline, external_populator,            replace: Representable::SetValue) if definition[:populator] # FIXME: only diff to options without :populator
+              pipeline  = Trb1::Representable::Pipeline::Insert.(pipeline, external_populator,            replace: Trb1::Representable::SetValue) if definition[:populator] # FIXME: only diff to options without :populator
               pipeline
             end
           end
@@ -86,7 +86,7 @@ module Trb1
       include Prepopulate
 
       def skip!
-        Representable::Pipeline::Stop
+        Trb1::Representable::Pipeline::Stop
       end
     end
   end

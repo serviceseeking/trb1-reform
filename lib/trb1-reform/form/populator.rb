@@ -16,7 +16,7 @@ class Trb1::Reform::Form::Populator
     model = get(options)
     twin  = call!(options.merge(model: model, collection: model))
 
-    return twin if twin == Representable::Pipeline::Stop
+    return twin if twin == Trb1::Representable::Pipeline::Stop
 
     # this kinda sucks. the proc may call self.composer = Artist.new, but there's no way we can
     # return the twin instead of the model from the #composer= setter.
@@ -42,7 +42,7 @@ private
   end
 
   def get(options)
-     Representable::GetValue.(nil, options)
+     Trb1::Representable::GetValue.(nil, options)
   end
 
   def deprecate_positional_args(form, proc, options) # TODO: remove in 2.2.

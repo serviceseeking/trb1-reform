@@ -43,8 +43,8 @@ private
   def deserializer(source=self.class, options={}) # called on top-level, only, for now.
     deserializer = Trb1::Disposable::Rescheme.from(source,
       {
-        include:          [Representable::Hash::AllowSymbols, Representable::Hash],
-        superclass:       Representable::Decorator,
+        include:          [Trb1::Representable::Hash::AllowSymbols, Trb1::Representable::Hash],
+        superclass:       Trb1::Representable::Decorator,
         definitions_from: lambda { |inline| inline.definitions },
         options_from:     :deserializer,
         exclude_options:  [:default, :populator] # Reform must not copy Disposable/Reform-only options that might confuse representable.
