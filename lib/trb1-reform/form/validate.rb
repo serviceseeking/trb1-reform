@@ -2,7 +2,7 @@
 module Trb1::Reform::Form::Validate
   module Skip
     class AllBlank
-      include Uber::Callable
+      include Trb1::Uber::Callable
 
       def call(form, options)
         params = options[:input]

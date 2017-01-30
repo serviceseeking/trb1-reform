@@ -1,6 +1,6 @@
 module Trb1::Reform::Form::ORM
   def model_for_property(name)
-    return model unless is_a?(Reform::Form::Composition) # i am too lazy for proper inheritance. there should be a ActiveRecord::Composition that handles this.
+    return model unless is_a?(Trb1::Reform::Form::Composition) # i am too lazy for proper inheritance. there should be a ActiveRecord::Composition that handles this.
 
     model_name = options_for(name)[:on]
     model[model_name]

@@ -3,7 +3,7 @@ module Trb1::Reform::Form::Module
   # DISCUSS: could this be part of Declarative?
   def self.included(base)
     base.extend ClassMethods
-    base.extend Declarative::Heritage::DSL # ::heritage
+    base.extend Trb1::Declarative::Heritage::DSL # ::heritage
     # base.extend Declarative::Heritage::Included # ::included
     base.extend Included
   end
