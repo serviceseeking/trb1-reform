@@ -38,7 +38,7 @@ private
   end
 
   def handle_fail(twin, options)
-    raise "[Reform] Your :populator did not return a Trb1::Reform::Form instance for `#{options[:binding].name}`." if options[:binding][:nested] && !twin.is_a?(Reform::Form)
+    raise "[Reform] Your :populator did not return a Trb1::Reform::Form instance for `#{options[:binding].name}`." if options[:binding][:nested] && !twin.is_a?(Trb1::Reform::Form)
   end
 
   def get(options)
